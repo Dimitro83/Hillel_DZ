@@ -1,10 +1,11 @@
 import random
 while True:
-    your_list = input('please enter how many items in list do you want: ')
-    if not your_list.isdigit():
+    your_list = input('please enter how many items in list do you want, but not more than 200: ')
+    if not your_list.isdigit() or int(your_list) == 0 or int(your_list) > 200:
         continue
     else:
         break
+
 
 quantity_list = 0
 worklist = []
@@ -13,30 +14,27 @@ while quantity_list < int(your_list):
     worklist.append(numbers)
     quantity_list += 1
 print(worklist)
+print('_'*50)
 
 
-def counter(a):
-    target = a
-    index = 0
-    quantity = 0
-    list_final = []
-    for i in worklist:
-        if int(i) == target:
-            quantity += 1
-        index += 1
-# хотел чтоб здесь list_final получался из сложенных list_01, а потом уже создать словарь.
-# я вообще в правильном направлении???
-    # print(numero)
-    # print(quantity)
-    # list_final = (numero) + (quantity)
-        list_01 = [numero, quantity]
-        list_final += list_01
-    # print(dict_final)
-    print(list_01)
-    print(list_final)
+def counter(lst, dct_temp):
+    for i in lst:
+        if i in dct_temp:
+            dct_temp[i] += 1
+        else:
+            dct_temp[i] = 1
 
 
-numero = 1
-for q in range(1, 11):
-    counter(numero)
-    numero += 1
+dct_result = {}
+
+counter(worklist, dct_result)
+print(dct_result)
+print('_'*50)
+end_world = lambda item: 'раза' if dct_result[item] in \
+                                   (2, 3, 4, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64,
+                                    72, 73, 74, 82, 83, 84, 92, 93, 94, 102, 103, 104, 122, 123, 124,
+                                    132, 133, 134, 142, 143, 145, 152, 153, 154, 162, 163, 164,
+                                    172, 173, 174, 182, 183, 184, 192, 193, 194) else 'раз'
+
+for item in sorted(dct_result):
+    print(f'число %d встречается в первоначальном списке %d {end_world(item)}' % (item, dct_result[item]))
