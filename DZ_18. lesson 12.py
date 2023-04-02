@@ -12,4 +12,6 @@ with open('name_age.csv', 'w', newline='', encoding='utf-8') as f:
         if random.random() <= 0.75:
             operators = ['095', '066', '098', '096', '050', '097']
             mobile = random.choice(operators) + ''.join([str(random.randint(0, 9)) for i in range(7)])
+        else:
+            mobile = ''
         writer.writerow([key, name_age[0], name_age[1], mobile])
